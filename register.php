@@ -6,6 +6,7 @@ include('essentials.php');
 
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://achlys.me/css/app.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         type="text/css">
@@ -33,12 +34,50 @@ include('essentials.php');
 	}
     ?>
     <?= @$template['navbar'] ?>
-    <form method="post">
-		<input type="text" name="username" placeholder="username">
-		<input type="password" name="password" placeholder="password">
-		<p><?= @$error ?></p>
-		<button>Se connecter</button>
-	</form>
+
+    <div class="app">
+        <div class="form" style="position: relative;" wire:poll="interval">
+            <div class="fields">
+            </div>
+            <form class="fields" method="post">
+
+                <div class="inputbox">
+                    <label for="email">Identifiant</label>
+                    <input type="text" name="username" placeholder="username">
+                </div>
+
+                <div class="inputbox">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" name="password" placeholder="password">
+                </div>
+                <p><?= @$error ?></p>
+
+
+                <button id="loginBtn" class="submit" wire:click="submit">Inscription</button>
+
+
+
+            </form>
+        </div>
+
+
+
+        <style>
+            #qr {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
+
+            .selectacc {
+                background: var(--primary);
+                padding: .5rem;
+                color: white;
+                margin-bottom: 2px;
+            }
+        </style>
+
+    </div>
     <?= @$template['footer'] ?>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
