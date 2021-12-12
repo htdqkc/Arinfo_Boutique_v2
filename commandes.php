@@ -15,23 +15,8 @@ include('essentials.php');
 
 <body>
     <?= @$template['navbar'] ?>
-    <?php
-    foreach($_SESSION['pannier'] as $k => $v){
-        addToCommand(json_encode($v));
-    }
-    unset($_SESSION['pannier']);
-    
-    ?>
-    <div class="py-5 text-center">
-        <div class="container">
-        <div class="row">
-            <div class="bg-white p-5 mx-auto col-md-8 col-10">
-            <h3 class="display-3">Payement</h3>
-            <p class="mb-3 lead">C'est bon c'est encaissé</p>
-            <a class="btn btn-outline-primary" href="index.php">Retour</a> </div>
-        </div>
-        </div>
-    </div>
+    <?= @$template['commandes'] ?>
+
 
     <?= @$template['footer'] ?>
 

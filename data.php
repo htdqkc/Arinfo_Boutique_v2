@@ -28,9 +28,35 @@ if (isset($_GET['display'])) {
         if ($_SESSION['pannier'] == []) {
         ?>
             <li class="list-group-item d-flex justify-content-between align-items-center"> Faites les courses <span class="badge badge-primary badge-pill">Votre pannier est vide</span> </li>
-<?php
+            <?php
         }
     }
+
+        if ($d == "CommandesJson") {
+
+            foreach (listCommands() as $key => $value) :
+                $art = json_decode(@$value['article']);
+            ?>
+                <li id="ItemId<?= $key ?>" class="list-group-item Product d-flex justify-content-between align-items-center">
+                    <img src="<?= $art->image ?>" style="height:50px">
+
+                    <a href="details.php?id=<?= $art->id ?>"><?= $art->title ?></a>
+
+                    <div>
+                        <span class="badge badge-primary badge-pill"><input style="background:none;border:none;width:40px;" id="upd<?= $key ?>" onchange="ChangeCountPannier(<?= $key ?>)" style="width:60px;" type="number" value="<?= @$art->count?>"> article(s)
+                            <?= $art->price * @$art->count ?>€</span>
+                    </div>
+
+                </li>
+            <?php
+            endforeach;
+            ?>
+
+            <?php
+
+        
+    }
+
 
     if ($d == "PannierCount") {
 
@@ -83,6 +109,7 @@ if (isset($_GET['display'])) {
     if ($d == "RemoveBasket") {
         $productId = $_GET['id'];
         $produit = ProductList()[$productId];
+
 
         if (isset($_SESSION['pannier'][$productId])) {
             unset($_SESSION['pannier'][$productId]);

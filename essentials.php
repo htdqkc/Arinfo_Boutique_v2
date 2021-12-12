@@ -17,6 +17,10 @@ Init();
     ob_start();
     include('template/details.php');
     $template['details'] = ob_get_clean();
+
+	ob_start();
+    include('template/commandes.php');
+    $template['commandes'] = ob_get_clean();
     
 if(isset($_GET['logout'])){
 	unset($_SESSION['loggin']);
@@ -147,6 +151,59 @@ return false;
 	}
   
 }
+function listCommands(){
+	$hostdb = 'localhost';
+	$namedb = 'arinfoboutiquev2';
+	$userdb = 'root';
+	$passdb = '';
+
+	try {
+	  // Connect and create the PDO object
+	  $conn = new PDO("mysql:host=$hostdb; dbname=$namedb", $userdb, $passdb);
+	  $conn->exec("SET CHARACTER SET utf8");      // Sets encoding UTF-8
+
+	  // Define and perform the SQL SELECT query
+	  $sql = "SELECT * FROM `commandes`";
+	  $result = $conn->query($sql);
+
+	  // Parse returned data, and displays them
+	  $commandes = [];
+	  while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+		 $commandes[] = $row;
+	  }
+	  return $commandes;
+
+	  $conn = null;        // Disconnect
+	}
+	catch(PDOException $e) {
+	  echo $e->getMessage();
+	}
+
+}
+
+function addToCommand($a){
+	$servername = 'localhost';
+	$username = 'root';
+	$password = '';
+ 	$dbname = 'arinfoboutiquev2';
+
+			// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	// Check connection
+	if ($conn->connect_error) {
+	  die("Connection failed: " . $conn->connect_error);
+	}
+
+	$sql = "INSERT INTO commandes (article)
+	VALUES ('$a')";
+
+	if ($conn->query($sql) === TRUE) {
+	   return true;
+	} else {
+		return false;
+	}
+}
+
 function displayArticle(){
     $articles = ProductList();
 
