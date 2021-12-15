@@ -32,7 +32,7 @@
 	   } else {
 		 ?>
                <li class="nav-item mx-2"> <a  style="color:white" class="nav-link" href="commandes.php">Commandes</a> </li>
-		    <li class="nav-item mx-2"> <a  style="color:white" class="nav-link" href="?logout=true">Deconnexion (<?=$_SESSION['loggin']?>)</a> </li>
+		    <li class="nav-item mx-2"> <a  style="color:white" class="nav-link" href="?logout=true">Deconnexion (<?=$_SESSION['loggin']['username']?>)</a> </li>
 	   <?php
 	   }
 	   ?>

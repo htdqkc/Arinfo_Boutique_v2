@@ -17,10 +17,12 @@ include('essentials.php');
     <?= @$template['navbar'] ?>
     <?php
     foreach($_SESSION['pannier'] as $k => $v){
-        addToCommand(json_encode($v));
+        // print_r($_SESSION['pannier']);
+        $idclient = $_SESSION['loggin']['id'];
+
+        addCommand($idclient,$v['id'],$v['count']);
     }
-    unset($_SESSION['pannier']);
-    
+
     ?>
     <div class="py-5 text-center">
         <div class="container">

@@ -28,33 +28,33 @@ if (isset($_GET['display'])) {
         if ($_SESSION['pannier'] == []) {
         ?>
             <li class="list-group-item d-flex justify-content-between align-items-center"> Faites les courses <span class="badge badge-primary badge-pill">Votre pannier est vide</span> </li>
-            <?php
+        <?php
         }
     }
 
-        if ($d == "CommandesJson") {
+    if ($d == "CommandesJson") {
 
-            foreach (listCommands() as $key => $value) :
-                $art = json_decode(@$value['article']);
-            ?>
-                <li id="ItemId<?= $key ?>" class="list-group-item Product d-flex justify-content-between align-items-center">
-                    <img src="<?= $art->image ?>" style="height:50px">
+        foreach (listCommands() as $key => $value) :
 
-                    <a href="details.php?id=<?= $art->id ?>"><?= $art->title ?></a>
+        ?>
+            <li id="ItemId<?= $key ?>" class="list-group-item Product d-flex justify-content-between align-items-center">
+                <img src="<?= $value['image'] ?>" style="height:50px">
 
-                    <div>
-                        <span class="badge badge-primary badge-pill"><input style="background:none;border:none;width:40px;" id="upd<?= $key ?>" onchange="ChangeCountPannier(<?= $key ?>)" style="width:60px;" type="number" value="<?= @$art->count?>"> article(s)
-                            <?= $art->price * @$art->count ?>€</span>
-                    </div>
+                <a href="details.php?id=<?= $value['id'] ?>"><?= $value['title'] ?></a>
 
-                </li>
-            <?php
-            endforeach;
-            ?>
+                <div>
+                    <span class="badge badge-primary badge-pill"><?= @$value['quantite'] ?> article(s)
+                        <?= $value['price'] * @$value['quantite'] ?>€</span>
+                </div>
 
-            <?php
+            </li>
+        <?php
+        endforeach;
+        ?>
 
-        
+<?php
+
+
     }
 
 
