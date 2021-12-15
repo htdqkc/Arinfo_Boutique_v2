@@ -40,7 +40,19 @@ if (isset($_GET['display'])) {
             <li id="ItemId<?= $key ?>" class="list-group-item Product d-flex justify-content-between align-items-center">
                 <img src="<?= $value['image'] ?>" style="height:50px">
 
-                <a href="details.php?id=<?= $value['id'] ?>"><?= $value['title'] ?></a>
+                <a href="details.php?id=<?= $value['id'] ?>"><?= $value['title'] ?>
+               
+            </a>
+            <span>
+            <?php
+                if( @$value['etat'] == 1  ){
+                    echo 'En cours de livraison';
+                }
+                if( @$value['etat'] == null  ){
+                    echo 'En cours de validation';
+                }
+                ?>
+            </span>
 
                 <div>
                     <span class="badge badge-primary badge-pill"><?= @$value['quantite'] ?> article(s)
