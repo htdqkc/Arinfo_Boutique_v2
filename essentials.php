@@ -101,8 +101,8 @@ function addCommand($idclient, $id_article, $quantite)
 	// Check connection
 
 
-	$sql = "INSERT INTO commandes (id_client,id_article)
-	VALUES ($idclient,$id_article)";
+	$sql = "INSERT INTO commandes (id_client,id_article, etat)
+	VALUES ($idclient,$id_article,1)";
 
 	$conn->query($sql);
 
