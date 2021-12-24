@@ -45,24 +45,24 @@ include('essentials.php');
 
             <div class="inputbox">
                     <label for="email">Identifiant</label>
-                    <input type="text" name="username" placeholder="username">
+                    <input type="email" required name="username" placeholder="email">
                 </div>
 
 
                 <div class="inputbox">
                     <label for="email">Nom</label>
-                    <input type="text" name="nom" placeholder="John">
+                    <input type="text" required name="nom" placeholder="John">
                 </div>
 
 
                 <div class="inputbox">
                     <label for="email">Prenom</label>
-                    <input type="text" name="prenom" placeholder="Doe">
+                    <input type="text" required name="prenom" placeholder="Doe">
                 </div>
 
                 <div class="inputbox">
                     <label for="password">Mot de passe</label>
-                    <input type="password" name="password" placeholder="password">
+                    <input type="password" required name="password" placeholder="password">
                 </div>
                 <p><?= @$error ?></p>
 

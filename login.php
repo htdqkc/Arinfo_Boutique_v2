@@ -42,14 +42,20 @@ include('essentials.php');
 
                 <div class="inputbox">
                     <label for="email">Identifiant</label>
-                    <input type="text" name="username" placeholder="username">
+                    <input type="text" name="username" value="<?= @$_GET['e'] ?>" placeholder="username">
                 </div>
 
                 <div class="inputbox">
                     <label for="password">Mot de passe</label>
                     <input type="password" name="password" placeholder="password">
                 </div>
-                <p><?= @$error ?></p>
+                <p><?php
+                 if(isset($_GET['e'])):
+                     echo'Vous etes inscrit avec '. $_GET['e'];
+                 endif;
+                 ?>
+                 <?= @$error ?>
+                 </p>
 
 
                 <button id="loginBtn" class="submit" wire:click="submit">Connexion</button>

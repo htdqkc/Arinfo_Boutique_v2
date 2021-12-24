@@ -36,6 +36,7 @@
     load('none', 'data.php?display=AddBasket&id=' + id + '&count=' + count);
     LoadPannier();
     UpdatePannierCount();
+    window.location = '';
     }
    LoadPannier();
 </script>

@@ -56,7 +56,7 @@ if (isset($_GET['display'])) {
 
                 <div>
                     <span class="badge badge-primary badge-pill"><?= @$value['quantite'] ?> article(s)
-                        <?= $value['price'] * @$value['quantite'] ?>€</span>
+                        <?= $value['price'] * @$value['quantite']+2 ?>€</span>
                 </div>
 
             </li>

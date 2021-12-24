@@ -5,58 +5,62 @@ include('essentials.php');
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-        type="text/css">
-    <link rel="stylesheet" href="theme.css" type="text/css">
-    <script type="text/javascript" src="index.js" ></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="theme.css" type="text/css">
+  <script type="text/javascript" src="index.js"></script>
 </head>
 
 <body>
-    <?= @$template['navbar'] ?>
-    <?= @$template['pannier'] ?>
-    <div class="py-5 text-center">
+  <?= @$template['navbar'] ?>
+  <?= @$template['pannier'] ?>
+  <div class="py-5 text-center">
     <div class="container">
       <div class="row">
         <div class="bg-white p-5 mx-auto col-md-8 col-10">
-     
-   
-		     <?php
-	   if(!isset($_SESSION['loggin'])){ 
-		?>        
-         <h3 class="display-3">Payement</h3>
-<a class="btn btn-outline-success" href="login.php">Connecter vous et payer</a>
 
-	   <?php 
-	   } elseif(!empty($_SESSION['pannier'])) {
-		 ?>
-          <h3 class="display-3">Payement</h3>
 
-		           <a class="btn btn-outline-success" href="recap.php">Passer au payement</a>
-               <a class="btn btn-outline-danger" href="index.php?remove=true">Vider mon pannier</a>
-		  
-	   <?php
-	   }
-	   ?>
-  
+          <?php
+          if (!isset($_SESSION['loggin'])) {
+          ?>
+            <h3 class="display-3">Payement</h3>
+            <a class="btn btn-outline-success" href="login.php">Connecter vous et payer</a>
+
+          <?php
+          } elseif (!empty($_SESSION['pannier'])) {
+          ?>
+            <h3 class="display-3">Payement</h3>
+            <?php
+$price = 0; 
+foreach ($_SESSION['pannier'] as $key => $value) :
+  $price = $price +  $value['price']*$value['count']; 
+endforeach;
+
+            ?>
+            <h2><?= $price ?>€ HT</h2>
+            <h2><?= $price+2*count($_SESSION['pannier']) ?>€ TTC dont <?= 2*count($_SESSION['pannier']) ?>€ de TVA</h2>
+            <a class="btn btn-outline-success" href="recap.php">Passer au payement</a>
+            <a class="btn btn-outline-danger" href="index.php?remove=true">Vider mon pannier</a>
+
+          <?php
+          }
+          ?>
+
+        </div>
       </div>
     </div>
-  </div>
 
     <?= @$template['footer'] ?>
 
 
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
     </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
 </body>
 
