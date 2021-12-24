@@ -20,17 +20,22 @@ include('essentials.php');
     <div class="container">
       <div class="row">
         <div class="bg-white p-5 mx-auto col-md-8 col-10">
-          <h3 class="display-3">Payement</h3>
-
-          <a class="btn btn-outline-danger" href="index.php?remove=true">Vider mon pannier</a>
-		  
+     
+   
 		     <?php
 	   if(!isset($_SESSION['loggin'])){ 
-		?>        <a class="btn btn-outline-success" href="login.php">Connecter vous et payer</a>
+		?>        
+         <h3 class="display-3">Payement</h3>
+<a class="btn btn-outline-success" href="login.php">Connecter vous et payer</a>
+
 	   <?php 
-	   } else {
+	   } elseif(!empty($_SESSION['pannier'])) {
 		 ?>
+          <h3 class="display-3">Payement</h3>
+
 		           <a class="btn btn-outline-success" href="recap.php">Passer au payement</a>
+               <a class="btn btn-outline-danger" href="index.php?remove=true">Vider mon pannier</a>
+		  
 	   <?php
 	   }
 	   ?>

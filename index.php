@@ -18,7 +18,7 @@ include('essentials.php');
 <body>
     <?php
     if(isset($_GET['remove'])){
-        session_destroy();
+        $_SESSION['pannier']= null;
         header('location: index.php');
     }
     ?>

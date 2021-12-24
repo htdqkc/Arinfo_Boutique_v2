@@ -74,7 +74,7 @@ function VerifyLogin($u, $p)
 		// Connect and create the PDO object
 		$conn = pdo();
 		// Define and perform the SQL SELECT query
-		$sql = "SELECT * FROM `clients` WHERE username='$u' AND password='$p'";
+		$sql = "SELECT * FROM `clients` WHERE email='$u' AND password='$p'";
 		$result = $conn->query($sql);
 
 		// Parse returned data, and displays them
@@ -101,13 +101,10 @@ function addCommand($idclient, $id_article, $quantite)
 	// Check connection
 
 
-	$sql = "INSERT INTO commandes (id_client,id_article, etat)
-	VALUES ($idclient,$id_article,1)";
+	$sql = "INSERT INTO commandes (numero, date, prix)
+	VALUES ('0','0',1)";
 
-	$conn->query($sql);
-
-	// Connect and create the PDO object
-	$conn = pdo();
+	$conn->query($sql);	
 
 	$stmt = $conn->prepare("SELECT * FROM `commandes` ORDER by id DESC limit 1");
 	$stmt->execute();
@@ -119,16 +116,13 @@ function addCommand($idclient, $id_article, $quantite)
 
 		$command_id = $v['id'];
 
-		$sql = "INSERT INTO commandes_articles (id_commande,quantite)
-						VALUES ($command_id, $quantite)";
+		$sql = "INSERT INTO commandes_articles (id_article,id_commande,quantite)
+						VALUES ($id_article, $command_id, $quantite)";
 
-			$conn->query($sql);
-		
-	
+		$conn->query($sql);
 	}
-		
 }
-function VerifyRegister($u, $p)
+function VerifyRegister($u, $p, $nom, $prenom)
 {
 
 	try {
@@ -136,7 +130,7 @@ function VerifyRegister($u, $p)
 		$conn = pdo();
 
 		// Define and perform the SQL SELECT query
-		$sql = "SELECT * FROM `clients` WHERE username='$u'";
+		$sql = "SELECT * FROM `clients` WHERE email='$u'";
 		$result = $conn->query($sql);
 
 		// Parse returned data, and displays them
@@ -160,10 +154,12 @@ function VerifyRegister($u, $p)
 			$conn = pdo();
 			// set the PDO error mode to exception
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO users (username, password)
-			VALUES ('$u', '$p')";
+			$sql = "INSERT INTO clients (email, password, nom, prenom)
+			VALUES ('$u', '$p','$nom','$prenom')";
 			// use exec() because no results are returned
 			$conn->exec($sql);
+			header('location: login.php?e='.$u);
+			return true;
 		} catch (PDOException $e) {
 			echo $sql . "<br>" . $e->getMessage();
 		}
@@ -177,13 +173,13 @@ function listCommands()
 		// Connect and create the PDO object
 		$conn = pdo();
 		// Define and perform the SQL SELECT query
-		$sql = "SELECT * FROM `commandes_articles` INNER JOIN commandes ON commandes_articles.id_commande = commandes.id INNER JOIN articles ON articles.id = commandes.id_article";
+		$sql = "SELECT * FROM `commandes_articles` INNER JOIN commandes ON commandes_articles.id_commande = commandes.id INNER JOIN articles ON articles.id = commandes_articles.id_article";
 		$result = $conn->query($sql);
 
 		// Parse returned data, and displays them
 		$commandes = [];
 		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-			
+
 			$commandes[] = $row;
 		}
 		return $commandes;

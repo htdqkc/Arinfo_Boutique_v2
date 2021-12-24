@@ -21,6 +21,7 @@ include('essentials.php');
         $idclient = $_SESSION['loggin']['id'];
 
         addCommand($idclient,$v['id'],$v['count']);
+        $_SESSION['pannier']=null;
     }
 
     ?>

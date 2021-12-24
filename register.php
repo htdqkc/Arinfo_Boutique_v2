@@ -25,9 +25,11 @@ include('essentials.php');
 	if(isset($_POST['username'])){
 		$u = addslashes(htmlspecialchars($_POST['username']));
 		$p = addslashes(htmlspecialchars($_POST['password']));
+        $nom = addslashes(htmlspecialchars($_POST['nom']));
+		$prenom = addslashes(htmlspecialchars($_POST['prenom']));
 		$error = "Compte deja existant";
 		
-		if(VerifyRegister($u,$p)){
+		if(VerifyRegister($u,$p,$nom,$prenom)){
 			$error = "Vous êtes inscrit";
 
 		}
@@ -41,9 +43,21 @@ include('essentials.php');
             </div>
             <form class="fields" method="post">
 
-                <div class="inputbox">
+            <div class="inputbox">
                     <label for="email">Identifiant</label>
                     <input type="text" name="username" placeholder="username">
+                </div>
+
+
+                <div class="inputbox">
+                    <label for="email">Nom</label>
+                    <input type="text" name="nom" placeholder="John">
+                </div>
+
+
+                <div class="inputbox">
+                    <label for="email">Prenom</label>
+                    <input type="text" name="prenom" placeholder="Doe">
                 </div>
 
                 <div class="inputbox">
