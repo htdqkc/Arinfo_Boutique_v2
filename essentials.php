@@ -93,16 +93,16 @@ function VerifyLogin($u, $p)
 
 	return false;
 }
-function addCommand($idclient, $id_article, $quantite)
+function addCommand($idclient, $id_article, $quantite, $num)
 {
 
 	// Create connection
 	$conn = pdo();
 	// Check connection
 
-
+	$d = time();
 	$sql = "INSERT INTO commandes (numero, date, prix)
-	VALUES ('0','0',1)";
+	VALUES ('$num','$d',1)";
 
 	$conn->query($sql);	
 
@@ -173,7 +173,31 @@ function listCommands()
 		// Connect and create the PDO object
 		$conn = pdo();
 		// Define and perform the SQL SELECT query
-		$sql = "SELECT * FROM `commandes_articles` INNER JOIN commandes ON commandes_articles.id_commande = commandes.id INNER JOIN articles ON articles.id = commandes_articles.id_article";
+		$sql = "SELECT * FROM `commandes_articles` INNER JOIN commandes ON commandes_articles.id_commande = commandes.id INNER JOIN articles ON articles.id = commandes_articles.id_article GROUP BY numero";
+		$result = $conn->query($sql);
+
+		// Parse returned data, and displays them
+		$commandes = [];
+		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+
+			$commandes[] = $row;
+		}
+		return $commandes;
+
+		$conn = null;        // Disconnect
+	} catch (PDOException $e) {
+		echo $e->getMessage();
+	}
+}
+function listCommandsNU($n)
+{
+
+
+	try {
+		// Connect and create the PDO object
+		$conn = pdo();
+		// Define and perform the SQL SELECT query
+		$sql = "SELECT * FROM `commandes_articles` INNER JOIN commandes ON commandes_articles.id_commande = commandes.id INNER JOIN articles ON articles.id = commandes_articles.id_article WHERE numero='$n'";
 		$result = $conn->query($sql);
 
 		// Parse returned data, and displays them

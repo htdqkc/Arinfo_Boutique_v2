@@ -38,11 +38,12 @@ if (isset($_GET['display'])) {
 
         ?>
             <li id="ItemId<?= $key ?>" class="list-group-item Product d-flex justify-content-between align-items-center">
-                <img src="<?= $value['image'] ?>" style="height:50px">
 
-                <a href="details.php?id=<?= $value['id'] ?>"><?= $value['title'] ?>
+                <span>
+     
                
-            </a>
+            </a># <span style="font-size:12px"><?= @$value['numero'] ?></span> <?= date('d/m/Y',$value['date']) ?>
+           </span>
             <span>
             <?php
                 if( @$value['etat'] == 1  ){
@@ -55,8 +56,7 @@ if (isset($_GET['display'])) {
             </span>
 
                 <div>
-                    <span class="badge badge-primary badge-pill"><?= @$value['quantite'] ?> article(s)
-                        <?= $value['price'] * @$value['quantite']+2 ?>€</span>
+                    <span class="badge badge-primary badge-pill"><a style="color:white" href="cd.php?id=<?= $value['numero'] ?>">Voir</a></span>
                 </div>
 
             </li>

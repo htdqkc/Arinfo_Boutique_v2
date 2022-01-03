@@ -16,12 +16,13 @@ include('essentials.php');
 <body>
     <?= @$template['navbar'] ?>
     <?php
+    $num = uniqid();
     foreach($_SESSION['pannier'] as $k => $v){
         // print_r($_SESSION['pannier']);
         $idclient = $_SESSION['loggin']['id'];
 
         if($v['count'] > 0){
-            addCommand($idclient,$v['id'],$v['count']);
+            addCommand($idclient,$v['id'],$v['count'],$num);
         }
         $_SESSION['pannier']=null;
     }
