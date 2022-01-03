@@ -15,7 +15,7 @@ if (isset($_GET['display'])) {
                 <a href="details.php?id=<?= $key ?>"><?= $value['title'] ?></a>
 
                 <div>
-                    <span class="badge badge-primary badge-pill"><input style="background:none;border:none;width:40px;" id="upd<?= $key ?>" onchange="ChangeCountPannier(<?= $key ?>)" style="width:60px;" type="number" value="<?= @$value['count'] ?>"> article(s)
+                    <span class="badge badge-primary badge-pill"><input min="1" style="background:none;border:none;width:40px;" id="upd<?= $key ?>" onchange="ChangeCountPannier(<?= $key ?>)" style="width:60px;" type="number" value="<?= @$value['count'] ?>"> article(s)
                         <?= $value['price'] * @$value['count'] ?>€</span> <a onclick="RemoveFromBasket('<?= $key ?>')">❌</a>
                 </div>
 
@@ -75,9 +75,11 @@ if (isset($_GET['display'])) {
         $price = 0;
         $count = 0;
         foreach ($_SESSION['pannier'] as $key => $value) {
+            if($value['count'] > 0){
             $count = $count + 1 * $value['count'];
             $priceHere = $value['price'] * @$value['count'];
             $price = $price + $priceHere;
+            }
         }
         echo $count . ' - ' . $price . '€';
         return;

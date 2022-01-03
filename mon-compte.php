@@ -15,26 +15,53 @@ include('essentials.php');
 
 <body>
     <?= @$template['navbar'] ?>
-    <div class="form" style="position: relative;" wire:poll="interval">
+    <?php
+
+        if(isset($_POST['old'])){
+            $conn = pdo();
+            // Check connection
+            $id = $_SESSION['loggin']['id'];
+            $old = $_POST['old'];
+            $new = $_POST['new'];
+            $stmt = $conn->prepare("SELECT * FROM `clients` WHERE id='$id' AND password='$old'");
+            $stmt->execute();
+        
+            // set the resulting array to associative
+            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $error = "Ancien mot de passe incorrect";
+            foreach ($stmt->fetchAll() as $k => $v) {
+        
+                $command_id = $v['id'];
+        
+                $sql = "UPDATE clients SET password='$new' WHERE id='$id' AND password='$old'";
+        
+                    $conn->query($sql);
+
+                    $error = "Mot de passe changé";
+                
+            }
+        }
+    ?>
+    <div class="form" style="position: relative;" >
             <div class="fields">
             </div>
             <form class="fields" method="post">
 
             <div class="inputbox">
                     <label for="email">Mot de passe actuel</label>
-                    <input type="text" name="username" placeholder="a finir">
+                    <input type="text" name="old" placeholder="a finir">
                 </div>
 
 
                 <div class="inputbox">
                     <label for="email">Nouveau</label>
-                    <input type="text" name="nom" placeholder="a finir">
+                    <input type="text" name="new" placeholder="a finir">
                 </div>
 
 
+                <?= @$error ?>
 
-
-                <button id="loginBtn" class="submit" wire:click="submit">Changer</button>
+                <button id="loginBtn" class="submit" type="submit">Changer</button>
 
 
 

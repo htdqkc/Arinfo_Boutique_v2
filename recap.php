@@ -20,7 +20,9 @@ include('essentials.php');
         // print_r($_SESSION['pannier']);
         $idclient = $_SESSION['loggin']['id'];
 
-        addCommand($idclient,$v['id'],$v['count']);
+        if($v['count'] > 0){
+            addCommand($idclient,$v['id'],$v['count']);
+        }
         $_SESSION['pannier']=null;
     }
 
