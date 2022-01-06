@@ -101,8 +101,9 @@ function addCommand($idclient, $id_article, $quantite, $num)
 	// Check connection
 
 	$d = time();
-	$sql = "INSERT INTO commandes (numero, date, prix)
-	VALUES ('$num','$d',1)";
+	$uid = $_SESSION['loggin']['id'];
+	$sql = "INSERT INTO commandes (numero, date, prix,user_id)
+	VALUES ('$num','$d',1,'$uid')";
 
 	$conn->query($sql);	
 
@@ -135,7 +136,7 @@ function VerifyRegister($u, $p, $nom, $prenom)
 
 		// Parse returned data, and displays them
 		while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-			$_SESSION['loggin'] = $u;
+
 			$compteDejaExistant = true;
 			return false;
 		}
@@ -172,8 +173,9 @@ function listCommands()
 	try {
 		// Connect and create the PDO object
 		$conn = pdo();
+		$uid = $_SESSION['loggin']['id'];
 		// Define and perform the SQL SELECT query
-		$sql = "SELECT * FROM `commandes_articles` INNER JOIN commandes ON commandes_articles.id_commande = commandes.id INNER JOIN articles ON articles.id = commandes_articles.id_article GROUP BY numero";
+		$sql = "SELECT * FROM `commandes_articles` INNER JOIN commandes ON commandes_articles.id_commande = commandes.id INNER JOIN articles ON articles.id = commandes_articles.id_article WHERE user_id='$uid' GROUP BY numero ";
 		$result = $conn->query($sql);
 
 		// Parse returned data, and displays them

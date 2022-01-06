@@ -42,7 +42,7 @@ if (isset($_GET['display'])) {
                 <span>
      
                
-            </a># <span style="font-size:12px"><?= @$value['numero'] ?></span> <?= date('d/m/Y',$value['date']) ?>
+            </a>#   <?=$key+1?> <span style="font-size:12px"><?= @$value['numero'] ?></span> <?= date('d/m/Y',$value['date']) ?>
            </span>
             <span>
             <?php

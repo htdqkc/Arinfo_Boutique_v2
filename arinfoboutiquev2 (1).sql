@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 24 déc. 2021 à 03:18
+-- Généré le : jeu. 06 jan. 2022 à 09:48
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `adresses` (
   `ville` varchar(30) NOT NULL,
   `code_postal` int(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `title` varchar(25) NOT NULL,
   `description` text NOT NULL,
   `desc_short` varchar(255) NOT NULL,
-  `price` int(110) NOT NULL,
+  `price` float NOT NULL,
   `count` int(11) NOT NULL,
   `id_gamme` int(11) NOT NULL,
   `stock` int(25) NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `nom` varchar(25) NOT NULL,
   `prenom` varchar(25) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `clients`
@@ -92,11 +92,14 @@ CREATE TABLE IF NOT EXISTS `clients` (
 INSERT INTO `clients` (`id`, `email`, `password`, `nom`, `prenom`) VALUES
 (10, 'b@b.fr', '', 'cc', 'cc'),
 (11, 'x@x.fr', 'x@x.fr', 'clement', 'sorio'),
-(12, 'a@mal.lu', '', 'c', 'c'),
+(12, 'a@mal.lu', '123', 'c', 'c'),
 (13, 'clement@mal.lu', '', 'soriot', 'clement'),
 (14, 'a', 'aa', '', ''),
 (15, 'aa@mal.lu', 'aa@mal.lu', 'a', 'a'),
-(16, 'x@mal.lu', 'x@mal.lu', 'c', 'b');
+(16, 'x@mal.lu', 'x@mal.lu', 'c', 'b'),
+(17, 'cx@mal.lu', 'c', 'cc', 'cc'),
+(18, 'Xx@mal.lu', 'X', 'X', 'X'),
+(19, 'ad@fr.fr', 'c', 'c', 'c');
 
 -- --------------------------------------------------------
 
@@ -107,33 +110,29 @@ INSERT INTO `clients` (`id`, `email`, `password`, `nom`, `prenom`) VALUES
 DROP TABLE IF EXISTS `commandes`;
 CREATE TABLE IF NOT EXISTS `commandes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `numero` int(11) NOT NULL,
+  `numero` varchar(255) NOT NULL,
   `date` varchar(255) NOT NULL,
   `prix` float NOT NULL,
+  `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `id_2` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=198 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=213 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `commandes`
 --
 
-INSERT INTO `commandes` (`id`, `numero`, `date`, `prix`) VALUES
-(184, 1, '', 0),
-(185, 1, '', 0),
-(186, 0, '0', 1),
-(187, 0, '0', 1),
-(188, 0, '0', 1),
-(189, 0, '0', 1),
-(190, 0, '0', 1),
-(191, 0, '0', 1),
-(192, 0, '0', 1),
-(193, 0, '0', 1),
-(194, 0, '0', 1),
-(195, 0, '0', 1),
-(196, 0, '0', 1),
-(197, 0, '0', 1);
+INSERT INTO `commandes` (`id`, `numero`, `date`, `prix`, `user_id`) VALUES
+(204, '61d320571271c', '0', 1, 0),
+(205, '61d320a544fd5', '0', 1, 0),
+(206, '61d320a544fd5', '0', 1, 0),
+(207, '61d320f3b7f16', '0', 1, 0),
+(208, '61d320f3b7f16', '0', 1, 0),
+(209, '61d3217f36a3a', '1641226623', 1, 0),
+(210, '61d3217f36a3a', '1641226624', 1, 0),
+(211, '61d458b58824a', '1641306293', 1, 19),
+(212, '61d458dea6707', '1641306334', 1, 19);
 
 -- --------------------------------------------------------
 
@@ -150,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `commandes_articles` (
   UNIQUE KEY `id_articles` (`id_commande`),
   KEY `id_articles_2` (`id_commande`),
   KEY `id_articles_3` (`id_commande`)
-) ENGINE=InnoDB AUTO_INCREMENT=198 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=213 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `commandes_articles`
@@ -164,7 +163,22 @@ INSERT INTO `commandes_articles` (`id_commande`, `id_article`, `quantite`) VALUE
 (194, 5, 1),
 (195, 5, 4),
 (196, 3, 1),
-(197, 5, 14);
+(197, 5, 14),
+(198, 5, 1),
+(199, 5, 3),
+(200, 3, 1),
+(201, 5, 1),
+(202, 5, 1),
+(203, 5, 1),
+(204, 5, 1),
+(205, 5, 1),
+(206, 3, 1),
+(207, 5, 1),
+(208, 3, 1),
+(209, 5, 1),
+(210, 3, 1),
+(211, 5, 3),
+(212, 5, 4);
 
 -- --------------------------------------------------------
 
