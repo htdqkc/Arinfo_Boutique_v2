@@ -12,7 +12,7 @@
         <!-- Example single danger button -->
         <div class="btn-group">
           <a href="pannier.php" type="button" class="btn btn-danger dropdown-toggle">
-            Panier <span id="pannierCount"></span> HT
+            Panier <span id="pannierCount"></span>
           </a>
 
 

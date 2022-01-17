@@ -15,7 +15,11 @@ include('essentials.php');
 
 <body>
     <?= @$template['navbar'] ?>
-<ul>
+
+
+    <div style="display:flex;justify-content:center;flex-direction:column;min-height:80vh">
+    <h1>Détail de votre commande</h1>
+    <ul style="padding:2rem">
 <?php
 $prix = 0;
 foreach(listCommandsNU($_GET['id']
@@ -23,9 +27,10 @@ foreach(listCommandsNU($_GET['id']
     $prix = $prix + $v['price'];
     echo'<li>'.$v['quantite'].'x '.$v['title'].' '.$v['price']*$v['count'].'€ </li>';
 }
-echo $prix .'€';
+echo '<hr> Total : '. $prix .'€';
 ?>
 </ul>
+    </div>
 
 <?= @$template['footer'] ?>
 

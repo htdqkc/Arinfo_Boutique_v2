@@ -28,16 +28,49 @@ include('essentials.php');
     }
 
     ?>
-    <div class="py-5 text-center">
+<?php
+if(isset($_POST['cmd'])){
+?>
+
+<div class="py-5 text-center">
         <div class="container">
         <div class="row">
             <div class="bg-white p-5 mx-auto col-md-8 col-10">
-            <h3 class="display-3">Payement</h3>
-            <p class="mb-3 lead">C'est bon c'est encaissé</p>
+            <h3 class="display-3">Paiement</h3>
+            <p class="mb-3 lead">Paiement validé</p>
             <a class="btn btn-outline-primary" href="index.php">Retour</a> </div>
         </div>
         </div>
     </div>
+
+
+<?php
+}else{
+?>
+
+    <div class="py-5 text-center">
+        <div class="container">
+        <div class="row">
+            <div class="bg-white p-5 mx-auto col-md-8 col-10">
+            <h3 class="display-3">Information de livraison</h3>
+            <form action="" method="post">
+                <input type="hidden" name="cmd">
+                <input type="text" placeholder="Nom">
+                <input type="text" name="" placeholder="Prenom">
+
+                <input type="text" name="" placeholder="Adresse" required>
+                <input type="text" name="" placeholder="Ville" required>
+                <input type="text" name="" placeholder="Code Postal" required>
+
+                <button>Paiement</button>
+            </form> </div>
+        </div>
+        </div>
+    </div>
+
+<?php
+}
+?>
 
     <?= @$template['footer'] ?>
 

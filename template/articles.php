@@ -10,7 +10,7 @@
           </div>
             <div class="card-body">
               <h4 class="card-title"><?= $value['title'] ?> - <?= $value['price'] ?>€</h4>
-              <p class="card-text"><?= $value['desc_short'] ?></p> <a href="#" onclick="AjoutPannier(<?= $key ?>)" class="btn btn-success">Ajouter au pannier</a> <a href="details.php?id=<?= $key ?>"  class="btn btn-warning">Regarder</a>
+              <p class="card-text"><?= $value['desc_short'] ?></p> <a href="#" onclick="AjoutPannier(<?= $key ?>)" class="btn btn-success">Ajouter au panier</a> <a href="details.php?id=<?= $key ?>"  class="btn btn-warning">Regarder</a>
             </div>
           </div>
         </div>

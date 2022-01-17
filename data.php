@@ -81,7 +81,11 @@ if (isset($_GET['display'])) {
             $price = $price + $priceHere;
             }
         }
-        echo $count . ' - ' . $price . '€';
+        if($count == 0){
+            echo 'vide';
+        }else{
+            echo $count . ' - ' . $price . '€';
+        }
         return;
     }
 

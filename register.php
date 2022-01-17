@@ -37,7 +37,7 @@ include('essentials.php');
     ?>
     <?= @$template['navbar'] ?>
 
-    <div class="app">
+    <div class="app" style="height:100%">
         <div class="form" style="position: relative;" wire:poll="interval">
             <div class="fields">
             </div>
